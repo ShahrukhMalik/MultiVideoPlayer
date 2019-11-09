@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVKit
 
 class MainViewController: UIViewController {
 
@@ -18,19 +19,21 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        // Create player instances
+        firstPlayerView.player = createPlayerForVideo(name: "1", format: "mp4")
+        secondPlayerView.player = createPlayerForVideo(name: "2", format: "mp4")
+        
+        // Play videos
+        firstPlayerView.player?.play()
+        secondPlayerView.player?.play()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    // MARK: - Private methods
+    
+    private func createPlayerForVideo(name: String, format: String) -> AVPlayer {
+        let path = Bundle.main.path(forResource: name, ofType:format)!
+        return AVPlayer(url: URL(fileURLWithPath: path))
     }
-    */
-
 }
