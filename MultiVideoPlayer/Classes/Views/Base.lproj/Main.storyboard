@@ -16,13 +16,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RT2-ar-4Vk" customClass="PlayerView" customModule="MultiVideoPlayer" customModuleProvider="target">
-                                <rect key="frame" x="207" y="44" width="207" height="818"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IC2-gY-JPR" customClass="PlayerView" customModule="MultiVideoPlayer" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44" width="207" height="818"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aot-7V-w26">
+                                        <rect key="frame" x="10" y="10" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="fd7-Jf-O2y"/>
+                                            <constraint firstAttribute="height" constant="40" id="qXA-De-fdL"/>
+                                        </constraints>
+                                        <state key="normal" image="Sound"/>
+                                        <connections>
+                                            <action selector="firstPlayerSoundToggleAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ixd-uO-lBR"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="aot-7V-w26" firstAttribute="top" secondItem="IC2-gY-JPR" secondAttribute="top" constant="10" id="Diq-9t-qFX"/>
+                                    <constraint firstItem="aot-7V-w26" firstAttribute="leading" secondItem="IC2-gY-JPR" secondAttribute="leading" constant="10" id="eMX-7q-dfv"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RT2-ar-4Vk" customClass="PlayerView" customModule="MultiVideoPlayer" customModuleProvider="target">
+                                <rect key="frame" x="207" y="44" width="207" height="818"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dbS-qx-R0s">
+                                        <rect key="frame" x="10" y="10" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="tLf-PW-BD6"/>
+                                            <constraint firstAttribute="width" constant="40" id="vVt-4L-QUo"/>
+                                        </constraints>
+                                        <state key="normal" image="Sound"/>
+                                        <connections>
+                                            <action selector="secondPlayerSoundToggleAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZDN-gV-bzj"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="dbS-qx-R0s" firstAttribute="top" secondItem="RT2-ar-4Vk" secondAttribute="top" constant="10" id="Jfj-p8-z6F"/>
+                                    <constraint firstItem="dbS-qx-R0s" firstAttribute="leading" secondItem="RT2-ar-4Vk" secondAttribute="leading" constant="10" id="N2F-bH-Ijr"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -39,8 +73,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="firstPlayerView" destination="RT2-ar-4Vk" id="JTB-6F-vpk"/>
-                        <outlet property="secondPlayerView" destination="IC2-gY-JPR" id="xzR-RI-8ZI"/>
+                        <outlet property="firstPlayerSoundButton" destination="aot-7V-w26" id="p2G-tS-bj3"/>
+                        <outlet property="firstPlayerView" destination="IC2-gY-JPR" id="boc-aG-Lty"/>
+                        <outlet property="secondPlayerSoundButton" destination="dbS-qx-R0s" id="d9f-Ud-mmV"/>
+                        <outlet property="secondPlayerView" destination="RT2-ar-4Vk" id="xBQ-O3-Mkm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -48,4 +84,7 @@
             <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Sound" width="30" height="30"/>
+    </resources>
 </document>

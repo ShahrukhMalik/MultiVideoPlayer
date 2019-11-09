@@ -14,6 +14,9 @@ class MainViewController: UIViewController {
     @IBOutlet weak var firstPlayerView: PlayerView!
     @IBOutlet weak var secondPlayerView: PlayerView!
     
+    @IBOutlet weak var firstPlayerSoundButton: UIButton!
+    @IBOutlet weak var secondPlayerSoundButton: UIButton!
+    
     
     // MARK: - UIViewController methods
     
@@ -27,6 +30,32 @@ class MainViewController: UIViewController {
         // Play videos
         firstPlayerView.player?.play()
         secondPlayerView.player?.play()
+    }
+    
+    // MARK: - Action methods
+    
+    @IBAction func firstPlayerSoundToggleAction(_ sender: Any) {
+        
+        if firstPlayerView.player!.isMuted {
+            firstPlayerSoundButton.setImage(UIImage.init(named: "Sound"), for: .normal)
+            
+        } else {
+            firstPlayerSoundButton.setImage(UIImage.init(named: "Mute"), for: .normal)
+        }
+        
+        firstPlayerView.player?.isMuted = !firstPlayerView.player!.isMuted
+    }
+    
+    @IBAction func secondPlayerSoundToggleAction(_ sender: Any) {
+        
+        if secondPlayerView.player!.isMuted {
+            secondPlayerSoundButton.setImage(UIImage.init(named: "Sound"), for: .normal)
+            
+        } else {
+            secondPlayerSoundButton.setImage(UIImage.init(named: "Mute"), for: .normal)
+        }
+        
+        secondPlayerView.player?.isMuted = !secondPlayerView.player!.isMuted
     }
     
     
