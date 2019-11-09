@@ -17,6 +17,14 @@ class MainViewController: UIViewController {
     @IBOutlet weak var firstPlayerSoundButton: UIButton!
     @IBOutlet weak var secondPlayerSoundButton: UIButton!
     
+    @IBOutlet weak var firstPlayerRestartButton: UIButton!
+    @IBOutlet weak var secondPlayerRestartButton: UIButton!
+    
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     
     // MARK: - UIViewController methods
     
@@ -30,9 +38,26 @@ class MainViewController: UIViewController {
         // Play videos
         firstPlayerView.player?.play()
         secondPlayerView.player?.play()
+        
+        // Registering playback end notifications
+        NotificationCenter.default.addObserver(self, selector: #selector(playerOneDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: firstPlayerView.player?.currentItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(playerTwoDidFinishPlaying), name: .AVPlayerItemDidPlayToEndTime, object: secondPlayerView.player?.currentItem)
     }
     
+    
     // MARK: - Action methods
+    
+    @IBAction func firstPlayerRestartButtonTapped(_ sender: Any) {
+        firstPlayerRestartButton.isHidden = true
+        firstPlayerView.player?.seek(to: CMTime.zero)
+        firstPlayerView.player?.play()
+    }
+    
+    @IBAction func secondPlayerRestartButtonTapped(_ sender: Any) {
+        secondPlayerRestartButton.isHidden = true
+        secondPlayerView.player?.seek(to: CMTime.zero)
+        secondPlayerView.player?.play()
+    }
     
     @IBAction func firstPlayerSoundToggleAction(_ sender: Any) {
         
@@ -64,5 +89,13 @@ class MainViewController: UIViewController {
     private func createPlayerForVideo(name: String, format: String) -> AVPlayer {
         let path = Bundle.main.path(forResource: name, ofType:format)!
         return AVPlayer(url: URL(fileURLWithPath: path))
+    }
+    
+    @objc func playerOneDidFinishPlaying() {
+        firstPlayerRestartButton.isHidden = false
+    }
+    
+    @objc func playerTwoDidFinishPlaying() {
+        secondPlayerRestartButton.isHidden = false
     }
 }

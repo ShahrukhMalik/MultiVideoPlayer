@@ -30,11 +30,25 @@
                                             <action selector="firstPlayerSoundToggleAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ixd-uO-lBR"/>
                                         </connections>
                                     </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Df-fK-asO">
+                                        <rect key="frame" x="83.5" y="389" width="40" height="40"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="DPw-bE-Hib"/>
+                                            <constraint firstAttribute="height" constant="40" id="hkS-LY-ozA"/>
+                                        </constraints>
+                                        <state key="normal" image="Restart"/>
+                                        <connections>
+                                            <action selector="firstPlayerRestartButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rWU-24-URQ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstItem="aot-7V-w26" firstAttribute="top" secondItem="IC2-gY-JPR" secondAttribute="top" constant="10" id="Diq-9t-qFX"/>
+                                    <constraint firstItem="7Df-fK-asO" firstAttribute="centerX" secondItem="IC2-gY-JPR" secondAttribute="centerX" id="aGo-WO-PDm"/>
                                     <constraint firstItem="aot-7V-w26" firstAttribute="leading" secondItem="IC2-gY-JPR" secondAttribute="leading" constant="10" id="eMX-7q-dfv"/>
+                                    <constraint firstItem="7Df-fK-asO" firstAttribute="centerY" secondItem="IC2-gY-JPR" secondAttribute="centerY" id="v4a-cA-ajY"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RT2-ar-4Vk" customClass="PlayerView" customModule="MultiVideoPlayer" customModuleProvider="target">
@@ -51,11 +65,25 @@
                                             <action selector="secondPlayerSoundToggleAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZDN-gV-bzj"/>
                                         </connections>
                                     </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1YO-RA-cYQ">
+                                        <rect key="frame" x="83.5" y="389" width="40" height="40"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="14g-lk-3g9"/>
+                                            <constraint firstAttribute="height" constant="40" id="Y3v-8R-bJf"/>
+                                        </constraints>
+                                        <state key="normal" image="Restart"/>
+                                        <connections>
+                                            <action selector="secondPlayerRestartButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cm6-lE-sEb"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstItem="dbS-qx-R0s" firstAttribute="top" secondItem="RT2-ar-4Vk" secondAttribute="top" constant="10" id="Jfj-p8-z6F"/>
                                     <constraint firstItem="dbS-qx-R0s" firstAttribute="leading" secondItem="RT2-ar-4Vk" secondAttribute="leading" constant="10" id="N2F-bH-Ijr"/>
+                                    <constraint firstItem="1YO-RA-cYQ" firstAttribute="centerY" secondItem="RT2-ar-4Vk" secondAttribute="centerY" id="Rxn-SA-GTr"/>
+                                    <constraint firstItem="1YO-RA-cYQ" firstAttribute="centerX" secondItem="RT2-ar-4Vk" secondAttribute="centerX" id="uga-CM-ghH"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -73,8 +101,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="firstPlayerRestartButton" destination="7Df-fK-asO" id="PeJ-jD-9nb"/>
                         <outlet property="firstPlayerSoundButton" destination="aot-7V-w26" id="p2G-tS-bj3"/>
                         <outlet property="firstPlayerView" destination="IC2-gY-JPR" id="boc-aG-Lty"/>
+                        <outlet property="secondPlayerRestartButton" destination="1YO-RA-cYQ" id="D3l-Gk-WCH"/>
                         <outlet property="secondPlayerSoundButton" destination="dbS-qx-R0s" id="d9f-Ud-mmV"/>
                         <outlet property="secondPlayerView" destination="RT2-ar-4Vk" id="xBQ-O3-Mkm"/>
                     </connections>
@@ -85,6 +115,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Restart" width="30" height="30"/>
         <image name="Sound" width="30" height="30"/>
     </resources>
 </document>
