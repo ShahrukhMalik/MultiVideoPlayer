@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="MultiVideoPlayer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RT2-ar-4Vk" customClass="PlayerView" customModule="MultiVideoPlayer" customModuleProvider="target">
+                                <rect key="frame" x="207" y="44" width="207" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IC2-gY-JPR" customClass="PlayerView" customModule="MultiVideoPlayer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="207" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="RT2-ar-4Vk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Fjz-Vb-sIb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="RT2-ar-4Vk" secondAttribute="bottom" id="Qc0-Vr-nyk"/>
+                            <constraint firstItem="RT2-ar-4Vk" firstAttribute="width" secondItem="IC2-gY-JPR" secondAttribute="width" id="WKx-du-9bM"/>
+                            <constraint firstItem="IC2-gY-JPR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Xlp-p1-G3h"/>
+                            <constraint firstItem="IC2-gY-JPR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="dAS-Fr-TJy"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="IC2-gY-JPR" secondAttribute="bottom" id="h9W-be-ejN"/>
+                            <constraint firstItem="RT2-ar-4Vk" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ltY-Vm-kwY"/>
+                            <constraint firstItem="RT2-ar-4Vk" firstAttribute="leading" secondItem="IC2-gY-JPR" secondAttribute="trailing" id="tfy-kl-j6W"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="firstPlayerView" destination="RT2-ar-4Vk" id="JTB-6F-vpk"/>
+                        <outlet property="secondPlayerView" destination="IC2-gY-JPR" id="xzR-RI-8ZI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
+        </scene>
+    </scenes>
+</document>
