@@ -38,6 +38,11 @@
                                             <constraint firstAttribute="height" constant="40" id="hkS-LY-ozA"/>
                                         </constraints>
                                         <state key="normal" image="Restart"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="firstPlayerRestartButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rWU-24-URQ"/>
                                         </connections>
@@ -73,6 +78,11 @@
                                             <constraint firstAttribute="height" constant="40" id="Y3v-8R-bJf"/>
                                         </constraints>
                                         <state key="normal" image="Restart"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="secondPlayerRestartButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cm6-lE-sEb"/>
                                         </connections>
