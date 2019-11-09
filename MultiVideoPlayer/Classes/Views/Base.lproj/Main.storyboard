@@ -86,10 +86,19 @@
                                     <constraint firstItem="1YO-RA-cYQ" firstAttribute="centerX" secondItem="RT2-ar-4Vk" secondAttribute="centerX" id="uga-CM-ghH"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cdw-Cq-8Pq">
+                                <rect key="frame" x="144.5" y="812" width="125" height="30"/>
+                                <state key="normal" title="Tap here for filters"/>
+                                <connections>
+                                    <action selector="filterActionButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dSi-PV-I0V"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="RT2-ar-4Vk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Fjz-Vb-sIb"/>
+                            <constraint firstItem="Cdw-Cq-8Pq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LrL-5e-zFd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Cdw-Cq-8Pq" secondAttribute="bottom" constant="20" id="P2q-7f-dAr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="RT2-ar-4Vk" secondAttribute="bottom" id="Qc0-Vr-nyk"/>
                             <constraint firstItem="RT2-ar-4Vk" firstAttribute="width" secondItem="IC2-gY-JPR" secondAttribute="width" id="WKx-du-9bM"/>
                             <constraint firstItem="IC2-gY-JPR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Xlp-p1-G3h"/>
