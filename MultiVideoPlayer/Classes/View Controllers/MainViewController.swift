@@ -8,6 +8,7 @@
 
 import UIKit
 import AVKit
+import Photos
 
 class MainViewController: UIViewController {
 
@@ -46,6 +47,10 @@ class MainViewController: UIViewController {
     
     
     // MARK: - Action methods
+    
+    @IBAction func mergeButtonTapped(_ sender: Any) {
+        mergeVideos()
+    }
     
     @IBAction func filterActionButtonTapped(_ sender: Any) {
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -164,5 +169,102 @@ class MainViewController: UIViewController {
     
     @objc func playerTwoDidFinishPlaying() {
         secondPlayerRestartButton.isHidden = false
+    }
+    
+    func mergeVideos() {
+    let mixComposition : AVMutableComposition = AVMutableComposition()
+    
+    // Creating assets
+    let path1 = Bundle.main.path(forResource: "1", ofType:"mp4")
+    let url1 = URL(fileURLWithPath: path1!)
+    let asset1 : AVAsset = AVAsset(url: url1)
+        
+    let path2 = Bundle.main.path(forResource: "2", ofType:"mp4")
+    let url2 = URL(fileURLWithPath: path2!)
+    let asset2 : AVAsset = AVAsset(url: url2)
+        
+    // Creating asset tracks
+    let assetTrack1 : AVAssetTrack = asset1.tracks(withMediaType: AVMediaType.video)[0]
+    let assetTrack2 : AVAssetTrack = asset2.tracks(withMediaType: AVMediaType.video)[0]
+        
+    // Creating mutable composition video tracks
+    let mcvTrack1 : AVMutableCompositionTrack = mixComposition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: kCMPersistentTrackID_Invalid)!
+    do {
+        try mcvTrack1.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: asset1.duration), of: assetTrack1, at: CMTime.zero)
+        
+    } catch {
+        print("Mutable Error")
+    }
+
+    let mcvtrack2 : AVMutableCompositionTrack = mixComposition.addMutableTrack(withMediaType: AVMediaType.video, preferredTrackID: kCMPersistentTrackID_Invalid)!
+    do {
+        try mcvtrack2.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: asset2.duration), of: assetTrack2 , at: CMTime.zero)
+    } catch {
+        print("Mutable Error")
+    }
+        
+    // Creating mutable composition instruction
+    let mainInstruction = AVMutableVideoCompositionInstruction()
+    mainInstruction.timeRange = CMTimeRangeMake(start: CMTime.zero, duration: CMTimeMaximum(asset1.duration, asset2.duration) )
+
+    let videoLayerInstruction1 = AVMutableVideoCompositionLayerInstruction(assetTrack: mcvTrack1)
+    let scale1 : CGAffineTransform = CGAffineTransform.init(scaleX: 0.5, y: 0.5)
+    let translate1 : CGAffineTransform = CGAffineTransform.init(translationX: 0, y: 180)
+    videoLayerInstruction1.setTransform(scale1.concatenating(translate1), at: CMTime.zero)
+
+    let videoLayerInstruction2 = AVMutableVideoCompositionLayerInstruction(assetTrack: mcvtrack2)
+    let scale2 : CGAffineTransform = CGAffineTransform.init(scaleX: 0.5, y: 0.5)
+    let translate2 : CGAffineTransform = CGAffineTransform.init(translationX: 640, y: 180)
+    videoLayerInstruction2.setTransform(scale2.concatenating(translate2), at: CMTime.zero)
+
+    mainInstruction.layerInstructions = [videoLayerInstruction1, videoLayerInstruction2]
+
+    let mutableVideoComposition : AVMutableVideoComposition = AVMutableVideoComposition()
+    mutableVideoComposition.instructions = [mainInstruction]
+    mutableVideoComposition.frameDuration = CMTimeMake(value: 1, timescale: 30)
+    mutableVideoComposition.renderSize = CGSize(width: 1280 , height: 720)
+    
+        
+    // Export video to disk
+    let outputFileURL = URL(fileURLWithPath: NSTemporaryDirectory() + "merge.mp4")
+    do {
+        try FileManager.default.removeItem(at: outputFileURL)
+    } catch { print(error.localizedDescription) }
+        
+    let exporter: AVAssetExportSession = AVAssetExportSession(asset: mixComposition, presetName: AVAssetExportPresetHighestQuality)!
+    exporter.videoComposition = mutableVideoComposition
+    exporter.outputFileType = AVFileType.mov
+
+    exporter.outputURL = outputFileURL
+    exporter.shouldOptimizeForNetworkUse = true
+
+    exporter.exportAsynchronously { () -> Void in
+        switch exporter.status {
+
+            case AVAssetExportSession.Status.completed:
+                print("Completed")
+                PHPhotoLibrary.shared().performChanges({
+                    PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: outputFileURL)
+                }) { saved, error in
+                    if saved {
+                        let alertController = UIAlertController(title: "Your video was successfully saved", message: nil, preferredStyle: .alert)
+                        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                        alertController.addAction(defaultAction)
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                }
+            
+            case  AVAssetExportSession.Status.failed:
+                print("Failed")
+                print("\(exporter.error)")
+            
+            case AVAssetExportSession.Status.cancelled:
+                print("Cancelled")
+                print("\(exporter.error)")
+            
+            default:
+                print("Default")
+            }
+        }
     }
 }
